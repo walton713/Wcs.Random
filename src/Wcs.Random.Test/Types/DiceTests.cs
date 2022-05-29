@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using FluentAssertions;
+using MathNet.Numerics.Random;
 using Wcs.Random.Types;
 using Xunit;
 
@@ -141,6 +143,22 @@ public class DiceTests : RandomizerTests
         }
 
         CheckResults(results);
+    }
+
+    [Theory]
+    [Repeat(100)]
+    public void DSidesInputMustBePositive()
+    {
+        var badSides = new MersenneTwister(true).Next(-1_000_000_000, 1);
+        var act = () => _sut.DSides(badSides);
+        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage("sides must be positive (Parameter 'sides')");
+    }
+
+    [Fact]
+    public void DSidesInputMustNotBeZero()
+    {
+        var act = () => _sut.DSides(0);
+        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage("sides must be positive (Parameter 'sides')");
     }
 
     private static Dictionary<int, int> InitialResults(int sides)

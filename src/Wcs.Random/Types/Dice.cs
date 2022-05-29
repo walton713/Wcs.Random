@@ -1,10 +1,12 @@
+using System;
+
 namespace Wcs.Random.Types
 {
     public class Dice
     {
         private readonly System.Random _rng;
 
-        public Dice(System.Random rng)
+        internal Dice(System.Random rng)
         {
             _rng = rng;
         }
@@ -25,6 +27,8 @@ namespace Wcs.Random.Types
 
         public int D100() => DSides(Constants.Hundred);
 
-        public int DSides(int sides) => _rng.Next(Constants.One, sides + 1);
+        public int DSides(int sides) => sides > 0
+            ? _rng.Next(Constants.One, sides + 1)
+            : throw new ArgumentOutOfRangeException(nameof(sides), $"{nameof(sides)} must be positive");
     }
 }
