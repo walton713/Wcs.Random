@@ -1,4 +1,5 @@
 using System;
+using MathNet.Numerics.Random;
 
 namespace Wcs.Random.Types
 {
@@ -8,9 +9,9 @@ namespace Wcs.Random.Types
     /// </summary>
     public class Dice
     {
-        private readonly System.Random _rng;
+        private readonly RandomSource _rng;
 
-        internal Dice(System.Random rng)
+        internal Dice(RandomSource rng)
         {
             _rng = rng;
         }

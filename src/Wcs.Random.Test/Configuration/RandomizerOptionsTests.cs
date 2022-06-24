@@ -8,14 +8,14 @@ namespace Wcs.Random.Test.Configuration;
 public class RandomizerOptionsTests
 {
     [Fact]
-    public void DefaultOptionsUseSystemRandom()
+    public void DefaultOptionsUseMersenneTwister()
     {
-        new RandomizerOptions().RandomSource.Should().BeOfType<System.Random>();
+        new RandomizerOptions().RandomSource.Should().BeOfType<MersenneTwister>();
     }
 
     [Fact]
     public void RandomSourceIsConfigurable()
     {
-        new RandomizerOptions(MersenneTwister.Default).RandomSource.Should().BeOfType<MersenneTwister>();
+        new RandomizerOptions(new CryptoRandomSource()).RandomSource.Should().BeOfType<CryptoRandomSource>();
     }
 }

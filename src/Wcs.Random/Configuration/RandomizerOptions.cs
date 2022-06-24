@@ -1,3 +1,5 @@
+using MathNet.Numerics.Random;
+
 namespace Wcs.Random.Configuration
 {
     public class RandomizerOptions
@@ -6,11 +8,11 @@ namespace Wcs.Random.Configuration
         {
         }
 
-        public RandomizerOptions(System.Random randomSource)
+        public RandomizerOptions(RandomSource randomSource)
         {
             RandomSource = randomSource;
         }
 
-        public System.Random RandomSource { get; set; } = new System.Random();
+        public RandomSource RandomSource { get; } = MersenneTwister.Default;
     }
 }
