@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using MathNet.Numerics.Random;
 using Wcs.Random.Configuration;
@@ -17,5 +18,15 @@ public class RandomizerOptionsTests
     public void RandomSourceIsConfigurable()
     {
         new RandomizerOptions(new CryptoRandomSource()).RandomSource.Should().BeOfType<CryptoRandomSource>();
+    }
+
+    [Fact]
+    public void RandomSourceCannotBeNull()
+    {
+        var act = () => new RandomizerOptions(null);
+
+        act.Should()
+            .Throw<ArgumentNullException>()
+            .WithMessage("Value cannot be null. (Parameter 'randomSource')");
     }
 }
