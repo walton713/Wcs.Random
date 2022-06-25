@@ -3,8 +3,16 @@ A simple random data generator
 
 ## Usage
 
+Default:
+
 ```csharp
 var random = new Randomizer();
+```
+
+Setting randomizer options:
+
+```csharp
+var random = new RandomizerOptions(new CryptoRandomSource());
 ```
 
 ## Randomizers

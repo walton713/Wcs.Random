@@ -1,4 +1,4 @@
-using MathNet.Numerics.Random;
+using Wcs.Random.Configuration;
 using Wcs.Random.Types;
 
 namespace Wcs.Random
@@ -10,12 +10,18 @@ namespace Wcs.Random
     public class Randomizer
     {
         /// <summary>
-        /// Creates a new <c>Randomizer</c> based on the Mersenne Twister.
+        /// Creates a new <c>Randomizer</c> with the default options.
         /// </summary>
-        public Randomizer()
+        public Randomizer() : this(new RandomizerOptions())
         {
-            System.Random rng = new MersenneTwister(true);
-            Dice = new Dice(rng);
+        }
+
+        /// <summary>
+        /// Creates a new <c>Randomizer</c> with the supplied options.
+        /// </summary>
+        public Randomizer(RandomizerOptions randomizerOptions)
+        {
+            Dice = new Dice(randomizerOptions.RandomSource);
         }
 
         /// <summary>
